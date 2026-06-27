@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexora Home Automations | Premium Smart Living</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           CSS Variables (Theme Foundation)
+           ========================================= */
+        :root {
+            --primary-gold: #D4AF37;
+            --gold-hover: #B5952F;
+            --charcoal-black: #1A1A1A;
+            --pure-white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --text-light: #666666;
+            --border-color: rgba(26, 26, 26, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.90);
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--charcoal-black);
+            overflow-x: hidden;
+        }
+        
+        .hidden-mobile { display: none; }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* =========================================
+           1. Moving Ribbon (Ticker)
+           ========================================= */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--charcoal-black);
+            color: var(--primary-gold);
+            padding: 8px 0;
+            white-space: nowrap;
+        }
+
+        .ticker-move {
+            display: inline-block;
+            padding-left: 100%;
+            animation: ticker 25s linear infinite;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        @keyframes ticker {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+       /* =========================================
+           2. Top Contact & Social Bar
+           ========================================= */
+        .top-social-bar {
+            background-color: var(--pure-white); 
+            color: var(--charcoal-black); 
+            padding: 8px 0;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border-color); 
+        }
+        
+        .top-social-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--off-white);
+            color: var(--charcoal-black); 
+            border-radius: 50%;
+            margin-right: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-gold); 
+            color: var(--pure-white); 
+            border-color: var(--primary-gold);
+            transform: translateY(-2px);
+        }
+
+        .contact-info span {
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+            color: var(--primary-gold); 
+        }
+
+        /* =========================================
+           3. Main Header
+           ========================================= */
+        .header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            box-shadow: var(--shadow-soft);
+        }
+
+        .header-main-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--charcoal-black);
+            display: none; 
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--charcoal-black);
+        }
+
+        .gold-dot { color: var(--primary-gold); }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .icon-link {
+            font-size: 22px;
+            color: var(--charcoal-black);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .icon-link:hover { color: var(--primary-gold); }
+
+        .cart-badge {
+            position: absolute;
+            top: -6px;
+            right: -10px;
+            background-color: var(--primary-gold);
+            color: var(--pure-white);
+            font-size: 11px;
+            font-weight: 700;
+            height: 18px;
+            width: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .header-search-row {
+            padding: 0 20px 15px 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            outline: none;
+            font-size: 14px;
+            background-color: var(--off-white);
+            transition: 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+            background-color: var(--pure-white);
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .search-box button:hover { color: var(--primary-gold); }
+
+        /* =========================================
+           Bottom Row: Premium Categories (Pill Design)
+           ========================================= */
+        .category-nav {
+            padding: 15px 0 20px 0;
+            background-color: var(--pure-white);
+            border-top: 1px solid var(--border-color);
+            text-align: center; 
+        }
+
+        .nav-list {
+            display: flex;
+            justify-content: center; 
+            gap: 10px; 
+            padding: 0 20px;
+            overflow-x: auto; 
+            -ms-overflow-style: none;  
+            scrollbar-width: none;  
+        }
+        
+        .nav-list::-webkit-scrollbar {
+            display: none; 
+        }
+
+        .nav-list a {
+            display: block;
+            padding: 8px 18px; 
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--charcoal-black);
+            background-color: var(--off-white);
+            border: 1px solid var(--border-color);
+            border-radius: 50px; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap; 
+            transition: all 0.3s ease;
+        }
+
+        .nav-list a:hover, .nav-list a.active { 
+            background-color: var(--primary-gold);
+            color: var(--pure-white);
+            border-color: var(--primary-gold);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .sale-link { color: #E74C3C !important; }
+        .nav-list a:hover.sale-link, .nav-list a.active.sale-link {
+            background-color: #E74C3C;
+            color: white !important;
+            border-color: #E74C3C;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+        }
+
+        .badge-hot {
+            background-color: #E74C3C; color: white; font-size: 10px;
+            padding: 2px 6px; border-radius: 4px; margin-left: 5px;
+        }
+
+       /* =========================================
+           Desktop Layout Adjustments (PC View)
+           ========================================= */
+        @media (min-width: 993px) {
+            .hidden-desktop { 
+                display: none !important; 
+            } 
+            .hidden-mobile { 
+                display: flex !important; 
+            }
+            
+            .header-inner-desktop {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 15px 20px;
+            }
+            .header-main-row { padding: 0; width: auto; }
+            .header-search-row { padding: 0; flex: 1; max-width: 500px; margin: 0 40px; }
+            .category-nav { display: block !important; }
+        }
+
+        /* =========================================
+           Mobile Sidebar Elements
+           ========================================= */
+        .menu-overlay { display: none; }
+        .mobile-sidebar { display: none; }
+
+        /* =========================================
+           4. Clean Image Slider (No Text)
+           ========================================= */
+        .hero-section {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            width: 100%; /* Reduced height as there is no text */
+            overflow: hidden;
+            background-color: var(--charcoal-black);
+        }
+
+        .carousel-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: block; /* Removed flex layout since no text */
+        }
+
+        .carousel-slide.active { opacity: 1; z-index: 10; }
+
+        .carousel-slide img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center;
+            /* Removed brightness filter so image is 100% original */
+        }
+
+        /* Carousel Arrows - Kept them so user can slide manually */
+        .carousel-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px);
+            color: white; border: 1px solid rgba(255,255,255,0.2);
+            width: 50px; height: 50px; border-radius: 50%;
+            cursor: pointer; z-index: 20; font-size: 20px; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: var(--primary-gold); border-color: var(--primary-gold);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn { left: 2%; }
+        .next-btn { right: 2%; }
+
+        .carousel-dots {
+            position: absolute; bottom: 25px; right: 50%; transform: translateX(50%); /* Centered dots */
+            z-index: 20; display: flex; gap: 10px;
+        }
+
+        .dot {
+            width: 12px; height: 12px; background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%; cursor: pointer; transition: 0.3s;
+        }
+
+        .dot.active { background-color: var(--primary-gold); transform: scale(1.3); }
+
+        /* Quick Categories */
+        .quick-categories { margin-top: -40px; position: relative; z-index: 30; margin-bottom: 50px; }
+        .category-grid {
+            display: flex; justify-content: center; gap: 20px;
+            background: var(--pure-white); padding: 20px; border-radius: 16px;
+            box-shadow: var(--shadow-soft);
+        }
+        .cat-card {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 120px; height: 110px; border-radius: 12px; transition: 0.3s ease;
+        }
+        .cat-icon {
+            width: 55px; height: 55px; background-color: var(--off-white); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 22px;
+            color: var(--charcoal-black); margin-bottom: 10px; transition: 0.3s ease;
+        }
+        .cat-card:hover .cat-icon {
+            background-color: var(--primary-gold); color: var(--pure-white);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); transform: translateY(-5px);
+        }
+        .cat-card span { font-size: 13px; font-weight: 600; color: var(--text-light); }
+
+        /* =========================================
+           Mobile Responsiveness
+           ========================================= */
+        @media (max-width: 992px) {
+            .hidden-mobile { display: none !important; }
+            .header-inner-desktop { display: block; }
+            .mobile-menu-btn { display: block; }
+            .contact-info { display: none; } 
+            .top-social-bar .container { justify-content: center; } 
+            
+            .category-nav {
+                overflow-x: auto; white-space: nowrap; padding-bottom: 5px;
+            }
+            .category-nav::-webkit-scrollbar { height: 4px; }
+            .category-nav::-webkit-scrollbar-thumb { background-color: var(--border-color); border-radius: 10px; }
+            .nav-list { justify-content: flex-start; padding: 0 20px; gap: 20px; }
+
+            .menu-overlay {
+                display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px);
+                z-index: 1050; opacity: 0; visibility: hidden; transition: 0.4s ease;
+            }
+            .menu-overlay.active { opacity: 1; visibility: visible; }
+            .mobile-sidebar {
+                display: flex; position: fixed; top: 0; left: -100%; width: 85%; max-width: 350px;
+                height: 100vh; background-color: var(--pure-white); z-index: 1100;
+                box-shadow: 5px 0 25px rgba(0,0,0,0.1); transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                flex-direction: column; overflow-y: auto;
+            }
+            .mobile-sidebar.active { left: 0; }
+            .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--border-color); }
+            .close-btn { background: none; border: none; font-size: 24px; color: var(--text-light); cursor: pointer; transition: color 0.3s; }
+            .close-btn:hover { color: #E74C3C; }
+            .sidebar-links { padding: 20px; flex: 1; }
+            .sidebar-links li a { display: flex; align-items: center; padding: 15px 0; font-size: 15px; font-weight: 600; color: var(--charcoal-black); border-bottom: 1px solid var(--border-color); }
+            .sidebar-links li a i { width: 25px; color: var(--primary-gold); font-size: 18px; margin-right: 15px; }
+
+            /* MOBILE SLIDER LAYOUT - FIXED HEIGHT */
+            .hero-section { height: 350px; } /* Mobile par image ki height set kar di */
+            
+            .carousel-btn { 
+                width: 35px; height: 35px; font-size: 14px; 
+            }
+            .prev-btn { left: 5px; }
+            .next-btn { right: 5px; }
+            .carousel-dots { bottom: 15px; }
+
+            .category-grid { flex-wrap: wrap; gap: 10px; }
+            .cat-card { width: calc(50% - 10px); height: 90px; border: 1px solid var(--border-color); }
+        }
+
+        /* Logo Container - Flex layout ke liye */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Logo aur text ke darmiyan space */
+}
+
+/* Brand Logo Image */
+.brand-logo {
+    width: 45px; /* Size adjust kar sakte hain */
+    height: auto;
+}
+
+/* Brand Text Grouping */
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+/* NEXORA style */
+.main-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--charcoal-black);
+    letter-spacing: 1px;
+}
+.footer-main-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 1px;
+}
+/* HOME AUTOMATIONS style (Golden) */
+.sub-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--primary-gold); /* Gold color */
+    letter-spacing: 2px;
+    margin-top: 4px;
+}
+
+/* Featured Products Styles */
+.featured-products { margin-bottom: 60px; }
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.section-header h2 { font-size: 24px; font-weight: 700; }
+.view-all { color: var(--primary-gold); font-weight: 600; font-size: 14px; }
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background: var(--pure-white);
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: var(--shadow-soft);
+    transition: 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+.product-image {
+    position: relative;
+    height: 220px;
+    background: var(--off-white);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.product-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.badge-new, .badge-sale {
+    position: absolute; top: 10px; left: 10px; padding: 4px 10px;
+    border-radius: 5px; font-size: 10px; font-weight: 700; color: white;
+}
+.badge-new { background: #27AE60; }
+.badge-sale { background: #E74C3C; }
+
+.product-info h3 { font-size: 16px; margin-bottom: 5px; }
+.price { font-weight: 700; color: var(--primary-gold); margin-bottom: 15px; }
+.price span { color: var(--text-light); text-decoration: line-through; font-size: 13px; margin-left: 5px; }
+
+.add-to-cart {
+    width: 100%; padding: 10px; background: var(--charcoal-black);
+    color: white; border: none; border-radius: 10px; cursor: pointer;
+    font-weight: 600; transition: 0.3s;
+}
+.add-to-cart:hover { background: var(--primary-gold); }
+/* Why Choose Us Section */
+.why-us {
+    padding: 80px 0;
+    background-color: var(--pure-white);
+    border-top: 1px solid var(--border-color);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 20px;
+    transition: 0.3s ease;
+}
+
+.feat-icon {
+    font-size: 32px;
+    color: var(--primary-gold);
+    margin-bottom: 20px;
+    background: var(--off-white);
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.feature-card:hover .feat-icon {
+    background: var(--primary-gold);
+    color: var(--pure-white);
+    transform: translateY(-5px);
+}
+
+.feature-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.feature-card p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+/* Footer Styles */
+.footer {
+    background-color: var(--charcoal-black);
+    color: var(--pure-white);
+    padding: 60px 0 20px 0;
+    margin-top: 50px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--primary-gold);
+}
+
+.footer-col p {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a {
+    color: var(--text-light);
+    font-size: 14px;
+    transition: 0.3s;
+}
+.footer-col ul li a:hover { color: var(--primary-gold); padding-left: 5px; }
+
+.social-links a {
+    color: var(--pure-white);
+    background: #333;
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+.social-links a:hover { background: var(--primary-gold); }
+
+.newsletter-box {
+    display: flex;
+    background: #333;
+    border-radius: 50px;
+    padding: 5px;
+}
+.newsletter-box input {
+    background: transparent;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    width: 100%;
+    outline: none;
+}
+.newsletter-box button {
+    background: var(--primary-gold);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: var(--charcoal-black);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    font-size: 12px;
+    color: var(--text-light);
+}
+    </style>
+</head>
+<body>
+
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <nav class="mobile-sidebar" id="mobile-sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="logo-container">
+    <img src="media/logo.webp" alt="Nexora Logo" class="brand-logo">
+    <div class="brand-text">
+        <span class="main-title">NEXORA</span>
+        <span class="sub-title">HOMES AUTOMATIONS</span>
+    </div>
+</a>
+            <button class="close-btn" id="close-sidebar"><i class="fas fa-times"></i></button>
+        </div>
+        
+        
+
+        <ul class="sidebar-links">
+            <li><a href="#"><i class="fas fa-lock"></i> Smart Locks</a></li>
+            <li><a href="#"><i class="fas fa-video"></i> Security Cameras</a></li>
+            <li><a href="#"><i class="far fa-lightbulb"></i> Smart Lighting</a></li>
+            <li><a href="#"><i class="fas fa-plug"></i> Plugs & Switches</a></li>
+            <li><a href="#"><i class="fas fa-sliders-h"></i> Central Controls</a></li>
+            <li><a href="#" class="sale-link"><i class="fas fa-fire"></i> Bundles <span class="badge-hot">Sale</span></a></li>
+        </ul>
+        
+        
+    </nav>
+
+    <div class="ticker-wrap">
+        <div class="ticker-move">
+            Elevate Your Lifestyle | Free Nationwide Shipping on Orders Over Rs. 10,000 &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 1 Year Replacement Warranty on All Smart Devices &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; Elevate Your Lifestyle | Free Nationwide Shipping on Orders Over Rs. 10,000
+        </div>
+    </div>
+
+    <div class="top-social-bar">
+        <div class="container">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="contact-info">
+                <span><i class="fas fa-envelope"></i> support@nexora.pk</span>
+                <span><i class="fas fa-phone-alt"></i> +92 300 1234567</span>
+            </div>
+        </div>
+    </div>
+
+    <header class="header" id="main-header">
+        <div class="header-inner-desktop">
+            
+            <div class="header-main-row">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobile-toggle">
+                        <i class="fas fa-bars-staggered"></i>
+                    </button>
+                    <a href="#" class="logo-container">
+    <img src="media/logo.webp" alt="Nexora Logo" class="brand-logo">
+    <div class="brand-text">
+        <span class="main-title">NEXORA</span>
+        <span class="sub-title">HOMES AUTOMATIONS</span>
+    </div>
+</a>
+                </div>
+                
+                <div class="header-right hidden-desktop">
+                    <a href="#" class="icon-link"><i class="far fa-user"></i></a>
+                    <a href="#" class="icon-link"><i class="far fa-heart"></i></a>
+                    <a href="#" class="icon-link cart-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-badge">2</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="header-search-row">
+                <div class="search-box">
+                    <input type="text" placeholder="Search smart locks, cameras, sensors...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="header-right hidden-mobile" style="padding-right: 20px;">
+                <a href="#" class="icon-link"><i class="far fa-user"></i></a>
+                <a href="#" class="icon-link"><i class="far fa-heart"></i></a>
+                <a href="#" class="icon-link cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge">2</span>
+                </a>
+            </div>
+
+        </div>
+
+        
+    </header>
+    <nav class="category-nav">
+            <ul class="nav-list">
+                <li><a href="#" class="active">Smart Locks</a></li>
+                <li><a href="#">Security Cameras</a></li>
+                <li><a href="#">Smart Lighting</a></li>
+                <li><a href="#">Plugs & Switches</a></li>
+                <li><a href="#">Central Controls</a></li>
+                <li><a href="#" class="sale-link">Bundles <span class="badge-hot">Sale</span></a></li>
+            </ul>
+        </nav>
+
+    <section class="hero-section">
+        <div class="carousel-container">
+            <a href="#" class="carousel-slide active">
+                <img src="media/banner_3.webp" alt="Smart Lighting Banner">
+            </a>
+            <a href="#" class="carousel-slide">
+                <img src="media/banner_1.webp" alt="Smart Door Lock Banner">
+            </a>
+
+            
+            
+
+            <button class="carousel-btn prev-btn" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn next-btn" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+            
+            <div class="carousel-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-categories container">
+        <div class="category-grid">
+            <a href="#" class="cat-card">
+                <div class="cat-icon"><i class="fas fa-couch"></i></div>
+                <span>Living Room</span>
+            </a>
+            <a href="#" class="cat-card">
+                <div class="cat-icon"><i class="fas fa-bed"></i></div>
+                <span>Bedroom</span>
+            </a>
+            <a href="#" class="cat-card">
+                <div class="cat-icon"><i class="fas fa-shield-alt"></i></div>
+                <span>Security</span>
+            </a>
+            <a href="#" class="cat-card">
+                <div class="cat-icon"><i class="far fa-lightbulb"></i></div>
+                <span>Lighting</span>
+            </a>
+            <a href="#" class="cat-card hidden-mobile">
+                <div class="cat-icon"><i class="fas fa-plug"></i></div>
+                <span>Smart Plugs</span>
+            </a>
+        </div>
+    </section>
+    <!-- Part 3: Featured Products Section -->
+<section class="featured-products container">
+    <div class="section-header">
+        <h2>Best Sellers</h2>
+        <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    <div class="product-grid">
+        <!-- Product 1 -->
+        <div class="product-card">
+            <div class="product-image">
+                <img src="media/product_1.webp" alt="Product">
+                <span class="badge-new">New</span>
+            </div>
+            <div class="product-info">
+                <h3>Smart Door Lock X1</h3>
+                <p class="price">Rs. 15,500</p>
+                <button class="add-to-cart"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+            </div>
+        </div>
+        
+        <!-- Product 2 -->
+        <div class="product-card">
+            <div class="product-image">
+                <img src="media/product_2.webp" alt="Product">
+                <span class="badge-sale">Sale</span>
+            </div>
+            <div class="product-info">
+                <h3>WiFi Security Camera</h3>
+                <p class="price">Rs. 8,200 <span>Rs. 9,999</span></p>
+                <button class="add-to-cart"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+            <div class="product-image">
+                <img src="media/product_3.webp" alt="Product">
+            </div>
+            <div class="product-info">
+                <h3>Smart Hub Controller</h3>
+                <p class="price">Rs. 4,500</p>
+                <button class="add-to-cart"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Part 4: Why Choose Nexora -->
+<section class="why-us">
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feat-icon"><i class="fas fa-shield-halved"></i></div>
+                <h3>1 Year Warranty</h3>
+                <p>Official warranty on all smart devices for complete peace of mind.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feat-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+                <h3>Pro Installation</h3>
+                <p>Expert support and setup guidance for a seamless experience.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feat-icon"><i class="fas fa-truck-fast"></i></div>
+                <h3>Fast Delivery</h3>
+                <p>Nationwide shipping, delivered safely to your doorstep.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feat-icon"><i class="fas fa-headset"></i></div>
+                <h3>24/7 Support</h3>
+                <p>Our team is always here to assist you with any tech queries.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Part 5: Professional Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Col 1: Brand -->
+            <div class="footer-col">
+                <a href="#" class="logo-container">
+    <img src="media/logo.webp" alt="Nexora Logo" class="brand-logo">
+    <div class="brand-text">
+        <span class="footer-main-title">NEXORA</span>
+        <span class="sub-title">HOMES AUTOMATIONS</span>
+    </div>
+</a>
+                <p><br>Nexora Home Automations brings the future of smart living to your doorstep. Experience security, elegance, and comfort.<br><br></p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+
+            <!-- Col 2: Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Shop All</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Sale</a></li>
+                    <li><a href="#">Track Order</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Support -->
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Warranty Policy</a></li>
+                    <li><a href="#">Shipping Guide</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4: Newsletter -->
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p>Get the latest updates & offers.</p>
+                <div class="newsletter-box">
+                    <input type="email" placeholder="Enter your email">
+                    <button><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Nexora Home Automations. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Sticky Header Shadow
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) { header.classList.add('scrolled'); } 
+                else { header.classList.remove('scrolled'); }
+            });
+
+            // 2. Mobile Menu Logic
+            const mobileBtn = document.getElementById('mobile-toggle');
+            const closeBtn = document.getElementById('close-sidebar');
+            const mobileSidebar = document.getElementById('mobile-sidebar');
+            const menuOverlay = document.getElementById('menu-overlay');
+            const body = document.body;
+
+            function openMenu() {
+                mobileSidebar.classList.add('active');
+                menuOverlay.classList.add('active');
+                body.style.overflow = 'hidden'; 
+            }
+
+            function closeMenu() {
+                mobileSidebar.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                body.style.overflow = 'auto'; 
+            }
+
+            mobileBtn.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            menuOverlay.addEventListener('click', closeMenu); 
+
+            // 3. Hero Carousel Logic
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.dot');
+            const nextBtn = document.getElementById('nextSlide');
+            const prevBtn = document.getElementById('prevSlide');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            let slideInterval;
+
+            function goToSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                currentSlide = index;
+                if (currentSlide < 0) currentSlide = totalSlides - 1;
+                if (currentSlide >= totalSlides) currentSlide = 0;
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+
+            function nextSlideFunc() { goToSlide(currentSlide + 1); }
+            function prevSlideFunc() { goToSlide(currentSlide - 1); }
+
+            if(nextBtn && prevBtn) {
+                nextBtn.addEventListener('click', () => { nextSlideFunc(); resetInterval(); });
+                prevBtn.addEventListener('click', () => { prevSlideFunc(); resetInterval(); });
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => { goToSlide(index); resetInterval(); });
+            });
+
+            function startInterval() { slideInterval = setInterval(nextSlideFunc, 6000); }
+            function resetInterval() { clearInterval(slideInterval); startInterval(); }
+
+            startInterval();
+        });
+    </script>
+</body>
+</html>
